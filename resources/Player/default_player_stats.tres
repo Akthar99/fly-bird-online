@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="PlayerStat" load_steps=2 format=3 uid="uid://bgppr6vh8jllw"]
+
+[ext_resource type="Script" uid="uid://biixytv0cmb2u" path="res://scripts/player_stats.gd" id="1_4pb1w"]
+
+[resource]
+script = ExtResource("1_4pb1w")
+p_name = "default_player"
+metadata/_custom_type_script = "uid://biixytv0cmb2u"

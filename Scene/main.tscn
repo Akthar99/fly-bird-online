@@ -1,0 +1,73 @@
+[gd_scene load_steps=10 format=3 uid="uid://hihtk2fkufnx"]
+
+[ext_resource type="Texture2D" uid="uid://bvcioiey6mc2l" path="res://assets/background/background-day.png" id="1_f6udf"]
+[ext_resource type="Script" uid="uid://kmivo8ix81pp" path="res://Scene/main.gd" id="1_sblpm"]
+[ext_resource type="Resource" uid="uid://6cehk55lllbd" path="res://resources/Settings/settings_res.tres" id="2_ow1sv"]
+[ext_resource type="PackedScene" uid="uid://dg7p673a7parv" path="res://Scene/bird.tscn" id="3_r34rm"]
+[ext_resource type="PackedScene" uid="uid://bftypm6aa1dya" path="res://Scene/Interface.tscn" id="4_2wwxx"]
+[ext_resource type="Texture2D" uid="uid://cn3u3fq7mt630" path="res://assets/ground/base.png" id="5_3amdw"]
+[ext_resource type="AudioStream" uid="uid://cy07gbn006v8y" path="res://assets/music/bombastic_track.wav" id="6_1xcnr"]
+[ext_resource type="PackedScene" uid="uid://chrrbvwbs8fdd" path="res://Scene/level_1.tscn" id="8_75buv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3amdw"]
+size = Vector2(619.5, 20)
+
+[node name="main" type="Node2D" node_paths=PackedStringArray("background")]
+script = ExtResource("1_sblpm")
+settings_res = ExtResource("2_ow1sv")
+background = NodePath("bg/BackgroundDay")
+
+[node name="bg" type="Node2D" parent="."]
+
+[node name="BackgroundDay" type="Sprite2D" parent="bg"]
+position = Vector2(310, 470.00003)
+scale = Vector2(2.152778, 1.8359376)
+texture = ExtResource("1_f6udf")
+
+[node name="Bird" parent="." instance=ExtResource("3_r34rm")]
+position = Vector2(206, 470)
+scale = Vector2(1.5, 1.5)
+
+[node name="level_1" parent="." instance=ExtResource("8_75buv")]
+
+[node name="ground" type="Node2D" parent="."]
+
+[node name="Base" type="Sprite2D" parent="ground"]
+position = Vector2(310, 940)
+scale = Vector2(1.8452381, 1)
+texture = ExtResource("5_3amdw")
+
+[node name="Area2D" type="Area2D" parent="ground"]
+position = Vector2(296, 953)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ground/Area2D"]
+position = Vector2(14.25, -56)
+shape = SubResource("RectangleShape2D_3amdw")
+
+[node name="default_bg_music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1xcnr")
+autoplay = true
+
+[node name="main menu" parent="." instance=ExtResource("4_2wwxx")]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 320.0
+offset_top = 384.0
+offset_right = 320.0
+offset_bottom = 384.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[connection signal="game_over" from="level_1" to="main menu" method="_on_level_1_game_over"]
+[connection signal="body_entered" from="ground/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="start" from="main menu" to="." method="_on_control_start"]
+[connection signal="start" from="main menu" to="Bird" method="_on_control_start"]
+[connection signal="start" from="main menu" to="level_1" method="_on_main_menu_start"]
+[connection signal="stop" from="main menu" to="." method="_on_main_menu_stop"]
+[connection signal="stop" from="main menu" to="Bird" method="_on_control_stop"]
+[connection signal="stop" from="main menu" to="level_1" method="_on_main_menu_stop"]
+[connection signal="volume_changed" from="main menu" to="." method="_on_main_menu_volume_changed"]

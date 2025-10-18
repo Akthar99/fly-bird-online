@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://dg7p673a7parv"]
+
+[ext_resource type="Texture2D" uid="uid://b12ktmjeats0m" path="res://assets/bird/bluebird-midflap.png" id="1_easqi"]
+[ext_resource type="Script" uid="uid://drq2aruh51gr8" path="res://scripts/bird.gd" id="1_emhuj"]
+[ext_resource type="Shader" uid="uid://k4q0sxw037yj" path="res://shaders/bird_hurt.gdshader" id="2_u6lo0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_easqi"]
+size = Vector2(34, 24)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_524eg"]
+shader = ExtResource("2_u6lo0")
+shader_parameter/triger_effect = false
+shader_parameter/line_scale = 0.0
+shader_parameter/frequency = 3.0
+shader_parameter/alpha = 1.0
+
+[node name="Bird" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_emhuj")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_easqi")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_524eg")
+texture = ExtResource("1_easqi")

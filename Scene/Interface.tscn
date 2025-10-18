@@ -1,0 +1,104 @@
+[gd_scene load_steps=9 format=3 uid="uid://bftypm6aa1dya"]
+
+[ext_resource type="Script" uid="uid://bkwc1f0xj50vc" path="res://scripts/screen_shot.gd" id="1_2s2nn"]
+[ext_resource type="FontFile" uid="uid://ctajyqkgw3ryg" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="1_jr44q"]
+[ext_resource type="Resource" uid="uid://6cehk55lllbd" path="res://resources/Settings/settings_res.tres" id="2_3ij7y"]
+[ext_resource type="FontFile" uid="uid://bqf0h2ojfhhpf" path="res://assets/fonts/PixelOperator8.ttf" id="3_r85gr"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2s2nn"]
+font = ExtResource("1_jr44q")
+font_size = 32
+shadow_size = 5
+
+[sub_resource type="Theme" id="Theme_3ij7y"]
+default_font = ExtResource("3_r85gr")
+default_font_size = 16
+
+[sub_resource type="Theme" id="Theme_r85gr"]
+default_font = ExtResource("3_r85gr")
+default_font_size = 16
+
+[sub_resource type="Theme" id="Theme_nu626"]
+default_font = ExtResource("3_r85gr")
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2s2nn")
+settings_res = ExtResource("2_3ij7y")
+
+[node name="BoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -208.0
+offset_top = -38.0
+offset_right = 208.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="BoxContainer"]
+layout_mode = 2
+text = "Fly Bird Online"
+label_settings = SubResource("LabelSettings_2s2nn")
+
+[node name="Button" type="Button" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme = SubResource("Theme_3ij7y")
+theme_override_font_sizes/font_size = 32
+text = "Play"
+
+[node name="settings_button" type="Button" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = SubResource("Theme_r85gr")
+theme_override_font_sizes/font_size = 32
+text = "Settings"
+
+[node name="settingsI" type="MarginContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -122.5
+offset_top = -145.5
+offset_right = 122.5
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_nu626")
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="settingsI"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="settingsI/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Backgound Volume"
+
+[node name="HSlider" type="HSlider" parent="settingsI/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+min_value = -20.0
+max_value = 20.0
+
+[connection signal="pressed" from="BoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="BoxContainer/settings_button" to="." method="_on_settings_button_pressed"]
+[connection signal="value_changed" from="settingsI/VBoxContainer/HSlider" to="." method="_on_h_slider_value_changed"]

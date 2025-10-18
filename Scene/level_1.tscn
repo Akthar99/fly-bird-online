@@ -1,0 +1,56 @@
+[gd_scene load_steps=7 format=3 uid="uid://chrrbvwbs8fdd"]
+
+[ext_resource type="Texture2D" uid="uid://bpoeubjcgc3j4" path="res://assets/barier/Sprite-0001.png" id="1_8ko5r"]
+[ext_resource type="Script" uid="uid://cb3xcwo05vdx1" path="res://scripts/level_1.gd" id="1_au1pm"]
+[ext_resource type="Resource" uid="uid://bgppr6vh8jllw" path="res://resources/Player/default_player_stats.tres" id="2_5exfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_au1pm"]
+size = Vector2(94, 249.33334)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5exfe"]
+size = Vector2(94, 249.33331)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6544n"]
+size = Vector2(92, 104)
+
+[node name="level_1" type="Node2D"]
+script = ExtResource("1_au1pm")
+speed = 200.0
+gap = Vector2(64, 128)
+player_stats = ExtResource("2_5exfe")
+
+[node name="barrier_block" type="Node2D" parent="."]
+position = Vector2(47, 88)
+
+[node name="upper_barrier" type="Sprite2D" parent="barrier_block"]
+scale = Vector2(1, 3)
+texture = ExtResource("1_8ko5r")
+
+[node name="upper_area2d" type="Area2D" parent="barrier_block/upper_barrier"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="barrier_block/upper_barrier/upper_area2d"]
+position = Vector2(4, -2.6666622)
+shape = SubResource("RectangleShape2D_au1pm")
+
+[node name="botterm_barrier" type="Sprite2D" parent="barrier_block"]
+position = Vector2(0, 750)
+scale = Vector2(1, 3)
+texture = ExtResource("1_8ko5r")
+
+[node name="bottem_area2d" type="Area2D" parent="barrier_block/botterm_barrier"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="barrier_block/botterm_barrier/bottem_area2d"]
+position = Vector2(4, -3.0000305)
+shape = SubResource("RectangleShape2D_5exfe")
+
+[node name="score_area" type="Area2D" parent="barrier_block"]
+position = Vector2(-47, -88)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="barrier_block/score_area"]
+position = Vector2(51, 459)
+shape = SubResource("RectangleShape2D_6544n")
+
+[connection signal="body_entered" from="barrier_block/upper_barrier/upper_area2d" to="." method="_on_upper_area_2d_body_entered"]
+[connection signal="body_entered" from="barrier_block/botterm_barrier/bottem_area2d" to="." method="_on_bottem_area_2d_body_entered"]
