@@ -61,8 +61,3 @@ func _on_h_slider_value_changed(value: float) -> void:
 	settings_res.bg_default_volume_amount = value
 	emit_signal("volume_changed")
 	print("h_slider value -> ", value, "settings_res value -> ", settings_res.bg_default_volume_amount)
-
-
-func _on_level_1_game_over(socre: int) -> void:
-	emit_signal("stop")
-	print("You scored -> ", socre)

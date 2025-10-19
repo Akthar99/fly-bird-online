@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://hihtk2fkufnx"]
+[gd_scene load_steps=11 format=3 uid="uid://hihtk2fkufnx"]
 
 [ext_resource type="Texture2D" uid="uid://bvcioiey6mc2l" path="res://assets/background/background-day.png" id="1_f6udf"]
 [ext_resource type="Script" uid="uid://kmivo8ix81pp" path="res://Scene/main.gd" id="1_sblpm"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cn3u3fq7mt630" path="res://assets/ground/base.png" id="5_3amdw"]
 [ext_resource type="AudioStream" uid="uid://cy07gbn006v8y" path="res://assets/music/bombastic_track.wav" id="6_1xcnr"]
 [ext_resource type="PackedScene" uid="uid://chrrbvwbs8fdd" path="res://Scene/level_1.tscn" id="8_75buv"]
+[ext_resource type="PackedScene" uid="uid://c2d34cs3x4wc4" path="res://Scene/game_over.tscn" id="9_c2iwn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3amdw"]
 size = Vector2(619.5, 20)
@@ -29,6 +30,7 @@ position = Vector2(206, 470)
 scale = Vector2(1.5, 1.5)
 
 [node name="level_1" parent="." instance=ExtResource("8_75buv")]
+position = Vector2(-1, 0)
 
 [node name="ground" type="Node2D" parent="."]
 
@@ -62,7 +64,11 @@ offset_bottom = 384.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[connection signal="game_over" from="level_1" to="main menu" method="_on_level_1_game_over"]
+[node name="game over" parent="." instance=ExtResource("9_c2iwn")]
+visible = false
+
+[connection signal="game_over" from="level_1" to="." method="_on_level_1_game_over"]
+[connection signal="game_over" from="level_1" to="Bird" method="_on_level_1_game_over"]
 [connection signal="body_entered" from="ground/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="start" from="main menu" to="." method="_on_control_start"]
 [connection signal="start" from="main menu" to="Bird" method="_on_control_start"]
@@ -71,3 +77,4 @@ size_flags_vertical = 4
 [connection signal="stop" from="main menu" to="Bird" method="_on_control_stop"]
 [connection signal="stop" from="main menu" to="level_1" method="_on_main_menu_stop"]
 [connection signal="volume_changed" from="main menu" to="." method="_on_main_menu_volume_changed"]
+[connection signal="restart" from="game over" to="." method="_on_game_over_restart"]

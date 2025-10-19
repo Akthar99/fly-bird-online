@@ -60,3 +60,7 @@ func _on_control_start() -> void:
 
 func _on_control_stop() -> void:
 	start = false
+
+
+func _on_level_1_game_over(socre: int) -> void:
+	start = false

@@ -1,0 +1,55 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2d34cs3x4wc4"]
+
+[ext_resource type="FontFile" uid="uid://bqf0h2ojfhhpf" path="res://assets/fonts/PixelOperator8.ttf" id="1_iosw2"]
+[ext_resource type="Script" uid="uid://djjta5e4gn4qj" path="res://scripts/game_over.gd" id="2_lwxdm"]
+
+[sub_resource type="Theme" id="Theme_lwxdm"]
+default_font = ExtResource("1_iosw2")
+default_font_size = 16
+
+[node name="game over" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_lwxdm")
+script = ExtResource("2_lwxdm")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 94.0
+offset_top = 257.0
+offset_right = 523.0
+offset_bottom = 697.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_font_sizes/font_size = 24
+text = "Game Over"
+
+[node name="score_label" type="Label" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+text = "player score"
+
+[node name="restart_button" type="Button" parent="Panel/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "Restart"
+
+[connection signal="pressed" from="Panel/VBoxContainer/restart_button" to="." method="_on_restart_button_pressed"]

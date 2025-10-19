@@ -88,8 +88,10 @@ func _on_main_menu_stop() -> void:
 func _on_upper_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Bird":
 		emit_signal("game_over", score)
+		start = false
 
 func _on_bottem_area_2d_body_entered(body: Node2D) -> void:
 	if body.name == "Bird":
 		emit_signal("game_over", score)
+		start = false
 # bird collide with barriers -------------> 

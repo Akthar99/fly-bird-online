@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://k4q0sxw037yj" path="res://shaders/bird_hurt.gdshader" id="2_u6lo0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_easqi"]
-size = Vector2(34, 24)
+size = Vector2(30, 24)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_524eg"]
 shader = ExtResource("2_u6lo0")

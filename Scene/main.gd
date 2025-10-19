@@ -9,12 +9,14 @@ var available_music_tracks: Array
 @onready var _bg: Node2D = $bg
 @onready var main_menu: Control = $"main menu"
 @onready var default_bg_music: AudioStreamPlayer = $default_bg_music
+@onready var game_over: Control = $"game over"
 
 
 
 
 func _ready() -> void:
 	background_scroller.append(background) # push the first background sprite to background_scroller
+	settings_res = load("res://resources/Settings/settings_res.tres") # since reloading the scene in the restarting the game this is needed
 	default_bg_music.volume_db = settings_res.bg_default_volume_amount
 
 # TODOS : [
@@ -103,4 +105,18 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 
 func _on_main_menu_volume_changed() -> void:
+	settings_res = load("res://resources/Settings/settings_res.tres") # load if not loaded ( Main menu is rendered before main scene firing this signal )
+	var default_bg_music: AudioStreamPlayer = $default_bg_music
 	default_bg_music.volume_db = settings_res.bg_default_volume_amount
+	default_bg_music.volume_db = settings_res.bg_default_volume_amount
+
+
+func _on_level_1_game_over(socre: int) -> void:
+	# pass the score to show
+	game_over.set_global_score(socre)
+	game_over.visible = true # change the visibility to true 
+
+# if player click restart on game over scene restart the game
+func _on_game_over_restart() -> void:
+	game_over.visible = false # change the visisbility 
+	get_tree().reload_current_scene() # restart the main scene
