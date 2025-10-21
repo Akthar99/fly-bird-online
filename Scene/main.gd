@@ -106,9 +106,11 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 
 func _on_main_menu_volume_changed() -> void:
 	settings_res = load("res://resources/Settings/settings_res.tres") # load if not loaded ( Main menu is rendered before main scene firing this signal )
-	var default_bg_music: AudioStreamPlayer = $default_bg_music
-	default_bg_music.volume_db = settings_res.bg_default_volume_amount
-	default_bg_music.volume_db = settings_res.bg_default_volume_amount
+	if typeof(default_bg_music) == TYPE_NIL:
+		var default_bg_music: AudioStreamPlayer = $default_bg_music
+		default_bg_music.volume_db = settings_res.bg_default_volume_amount
+	else:
+		default_bg_music.volume_db = settings_res.bg_default_volume_amount
 
 
 func _on_level_1_game_over(socre: int) -> void:
